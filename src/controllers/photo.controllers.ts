@@ -1,5 +1,6 @@
 import {Request,Response} from 'express'
 import Fotos from '../models/Fotos'
+import Trabajo from '../models/Trabajo'
 import path from 'path'
 import fs from 'fs-extra'
 
@@ -37,6 +38,41 @@ export async function createFoto (req: Request , res: Response): Promise<Respons
     await photo.save();
     
     console.log(photo)
+    return res.json({
+        message: 'se guardo la foto ',
+        photo
+    })
+}
+export async function createFotoid (req: Request , res: Response): Promise<Response>{
+    
+    const{title} = req.body
+    const{id}=req.params
+    console.log("req.body",req.body)
+    console.log("body",req.body.title)
+    console.log("file",req.params)
+    
+    
+    const newPhoto={
+        title:title,
+        filePath:req.file.path,
+    };
+
+    var trabajoBus = await Trabajo.findById(id);
+
+    console.log('trabajoBuscado',trabajoBus);
+    
+    const photo = new Fotos(newPhoto);
+    console.log('trabajoBuscadoFoto',trabajoBus?.fotos);
+    
+    photo.trabajo= trabajoBus?.id;
+    
+    trabajoBus?.fotos.push(photo)
+    
+    console.log(photo)
+    
+    await photo.save();
+    await trabajoBus?.save();
+    
     return res.json({
         message: 'se guardo la foto ',
         photo
