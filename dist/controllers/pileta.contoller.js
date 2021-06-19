@@ -3,27 +3,58 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.crearPileta = exports.getPiletas = void 0;
-const Piletas_1 = __importDefault(require("../models/Piletas"));
+exports.crearTrabajo = exports.crearPileta = exports.getPiletas = void 0;
+const Trabajo_1 = __importDefault(require("../models/Trabajo"));
+const Fotos_1 = __importDefault(require("../models/Fotos"));
 async function getPiletas(req, res) {
-    const pileta = await Piletas_1.default.find();
-    return res.json(pileta);
+    const trabajo = await Trabajo_1.default.find();
+    return res.json(trabajo);
 }
 exports.getPiletas = getPiletas;
 async function crearPileta(req, res) {
     const { tipo } = req.body;
     console.log('body', req.body);
     console.log('tipo', tipo);
-    const newPileta = {
+    const newTrabajo = {
         tipo: tipo,
         fotos: []
     };
-    const pileta = new Piletas_1.default(newPileta);
-    //await pileta.save();
-    console.log('pileta', pileta);
+    const trabajo = new Trabajo_1.default(newTrabajo);
+    await trabajo.save();
+    console.log('trabajo', trabajo);
     return res.json({
-        message: 'se guardo la Pilita ',
-        pileta
+        message: 'se guardo la Trabajo ',
+        trabajo
     });
 }
 exports.crearPileta = crearPileta;
+async function crearTrabajo(req, res) {
+    const { title } = req.body;
+    const { tipo } = req.body;
+    console.log("req.body", req.body);
+    console.log("body", req.body.title);
+    console.log('tipo', tipo);
+    console.log('tipo', title);
+    const newTrabajo = {
+        tipo: tipo,
+        fotos: []
+    };
+    const newPhoto = {
+        title: title,
+        filePath: req.file.path,
+        trabajo: {}
+    };
+    const foto = new Fotos_1.default(newPhoto);
+    const trabajo = new Trabajo_1.default(newTrabajo);
+    foto.trabajo = trabajo.id;
+    trabajo.fotos.push(foto);
+    console.log('trabajo', trabajo);
+    console.log('foto', foto);
+    await trabajo.save();
+    await foto.save();
+    return res.json({
+        message: 'se guardo la Trabajo ',
+        trabajo
+    });
+}
+exports.crearTrabajo = crearTrabajo;

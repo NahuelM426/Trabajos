@@ -20,6 +20,7 @@ export async function getPhoto(req:Request , res:Response): Promise<Response>{
     return res.json(photo);
 }
 
+
 export async function createFoto (req: Request , res: Response): Promise<Response>{
     
     const{title} = req.body

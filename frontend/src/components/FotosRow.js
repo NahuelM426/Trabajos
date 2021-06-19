@@ -17,7 +17,7 @@ class FotosRow extends React.Component {
         return(
             <figure class="figure"  key={this.props.foto._id} onClick={this.selectFoto} >
             <img
-              src={process.env.PUBLIC_URL + 'http://localhost:4001/'+this.props.foto.filePath }
+              src={process.env.PUBLIC_URL + 'http://localhost:4000/'+this.props.foto.filePath }
               class="figure-img img-fluid rounded shadow-3 mb-3"
               alt="..."
               className="img"

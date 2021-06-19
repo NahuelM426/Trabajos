@@ -28,7 +28,7 @@ class CargarFoto extends React.Component{
             }
         }
 
-        axios.post("http://localhost:4001/api/photos",formData,conf)
+        axios.post("http://localhost:4000/api/photos",formData,conf)
             .then((res) => res.json())
             .then( prds => alert(prds.message))
             .catch((error) => {});

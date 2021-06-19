@@ -13,5 +13,6 @@ router.route('/photos')
 router.route('/photos/:id')
     .get(photo_controllers_1.getPhoto)
     .delete(photo_controllers_1.delatePhoto)
-    .put(photo_controllers_1.updatePhoto);
+    .put(photo_controllers_1.updatePhoto)
+    .post(multer_1.default.single('image'), photo_controllers_1.createFotoid);
 exports.default = router;

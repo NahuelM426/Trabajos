@@ -10,10 +10,10 @@ class  ListaDePiletas extends React.Component{
 
     }
     componentWillMount() {
-        fetch(`http://localhost:4001/api/photos`)
+        fetch(`http://localhost:4000/api/photos`)
           .then( res => res.json())
           .then( prds => {
-            this.setState({fotos: prds},console.log("fotos",this.state))}
+            this.setState({fotos: prds},() =>console.log("fotos",this.state))}
     )};
     
     

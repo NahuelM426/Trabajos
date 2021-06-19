@@ -2,13 +2,31 @@
 import {Request,Response} from 'express'
 import Trabajo from '../models/Trabajo'
 import Foto from '../models/Fotos'
+import { ObjectId } from 'mongoose';
 
 
 
-export async function  getPiletas (req:Request, res:Response): Promise<Response>{
+export async function  getTrabajos (req:Request, res:Response): Promise<Response>{
    const trabajo =  await Trabajo.find();
    return res.json(trabajo);
 }
+
+export async function getTrabajosId(req: Request, res: Response): Promise<Response> {
+    
+    const TrabajoB:any = await Trabajo.findById(req.params.id);
+
+    const fotos = await  Promise.all(TrabajoB.fotos.map(async (x:number) => {
+     return { foto: await Foto.findById(x)}
+    }));
+
+    console.log("foto",fotos)
+
+    return res.json({
+        message: 'Se Encontro',
+        fotos
+    });
+}
+ 
 
 export async function crearPileta(req:Request,res:Response):Promise<Response> {
 
@@ -67,8 +85,8 @@ export async function crearTrabajo(req:Request,res:Response):Promise<Response> {
 
     console.log('trabajo',trabajo)
     console.log('foto',foto)
-    // await trabajo.save();
-    // await foto.save();
+    await trabajo.save();
+    await foto.save();
 
 
 

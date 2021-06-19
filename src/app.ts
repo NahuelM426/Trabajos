@@ -6,10 +6,10 @@ const  app = express();
 
 var cors = require('cors');
 import indexrouter from './routes/index'
-import piletarouter from './routes/pileta'
+import trabajorouter from './routes/trabajo'
 //settings
 
-app.set('port',process.env.PORT || 4001);
+app.set('port',process.env.PORT || 4000);
 app.use(cors())
 //middleeares
 app.use(morgan('dev'));
@@ -20,7 +20,7 @@ app.use('/uploads',express.static('uploads'));
 
 //rutas configuro la ruta de donde pido los datos 
 app.use('/api',indexrouter);
-app.use('/pileta',piletarouter)
+app.use('/pileta',trabajorouter)
 
 
 export default app;
