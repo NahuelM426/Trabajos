@@ -21,24 +21,9 @@ class ListaDeTrabajo extends React.Component{
             return(
                 <div className = "Trabajoscss">
                     <h2> {this.props.title}</h2>
-
-                <table>
-                 <thead>
-                     <tr>
-                     <th>id</th>
-                     <th>Tipo</th>
-                     <th>fotos</th>
-                     </tr>
-                 </thead>
-                 <tbody>
+                 <div class="shadow-lg p-3 mb-5 bg-body rounded">
                      {this.renderRows()}
-                 </tbody>
-                </table>
-            
-                <div> 
-                <button style={ {margin :"5px"}}class="btn btn-outline-success" onClick={this.busquedoDeFoto}> Listo</button>
-          
-                </div>
+                 </div>
                 </div>
                 
                 )
@@ -60,7 +45,7 @@ class ListaDeTrabajo extends React.Component{
               ? console.log("NULL", null)
               : trabajos.map((unTrabajo, index) => {
                   return (
-                    <TrabajoRow
+                    <TrabajoRow 
                       key = {index.index}
                       trabajos={trabajos}
                       id = {unTrabajo.id}

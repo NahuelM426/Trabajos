@@ -44,30 +44,29 @@ class TrabajoRow extends React.Component {
     }
     
     render() {
-        console.log("Render", this.state)
         return (
-            <div>
+            <div class="container-fluid" class="shadow-none p-3 mb-5 bg-light rounded" >
+                    <div  class="justify-content-lg-start">
+                        <div class="col-4">
+                        <h2  >Descricon: </h2>
+                            <p class="text-end"> Las cactáceas son plantas de la familia de las suculentas. Son originarias de América pero también se encuentran en África y Madagascar. Son de tamaño mediano, grande o pequeño. En su interior contienen gran caudal de sábila como reserva de líquido dado que son plantas que se encuentran en climas desérticos (secos).
 
-            <div>
-            {this.state.nahuel.map(f => (
-                <figure>
-                <img
-                  src={process.env.PUBLIC_URL + 'http://localhost:4000/'+f }
-                  class="figure-img img-fluid rounded shadow-3 mb-3"
-                  alt="..."
-                  className="img"
-                  style={{width: 300, height: 200} }
-                  />
-                <figcaption class="figure-caption" >{}</figcaption>
-              </figure>
-           ))}
-            </div>
-            <tr key={this.state.trabajo._id}> 
-            </tr>    
-            <div> 
-                <button style={ {margin :"5px"}}class="btn btn-outline-success" onClick={this.vista}> Listo</button>
-          
-                </div>
+                                Fuente: https://www.ejemplos.co/10-ejemplos-de-textos-descriptivos/#ixzz6yRqwt8ie</p>
+                        </div>
+                        <div class="col-8">
+                        {this.state.nahuel.map(f => (
+                            <figure>
+                                <img
+                                src={process.env.PUBLIC_URL + 'http://localhost:4000/'+f }
+                                class="shadow-lg p-3 mb-2 bg-body rounded"
+                                style={{width: 400, height: 300} }
+                                />
+                                <figcaption class="figure-caption" ></figcaption>
+                            </figure>
+                        ))}
+                        </div>
+
+                    </div>  
             </div>
         );
 
