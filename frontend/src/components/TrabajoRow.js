@@ -1,11 +1,10 @@
 import React from 'react';
-
-
+import {Link} from 'react-router-dom'
+import imagen from '../img/nadar2.jpeg'
 class TrabajoRow extends React.Component {
     constructor(props) {
         super(props);
         this.map = this.map.bind(this)
-        this.vista = this.vista.bind(this)
         this.state = { trabajos:props.trabajos,trabajo:props.trabajo,fotos:{},n:0,nahuel:[]}
 
     }
@@ -25,30 +24,18 @@ class TrabajoRow extends React.Component {
             console.log("quetiene",f)
             return f.foto.filePath
         },console.log("nahuel",this.state))
-        this.setState({nahuel:datos},()=>this.vista())
+        this.setState({nahuel:datos})
         
     }
-    vista(){
-        this.state.nahuel.map(function(f){
-            <figure>
-            <img
-              src={process.env.PUBLIC_URL + 'http://localhost:4000/'+f }
-              class="figure-img img-fluid rounded shadow-3 mb-3"
-              alt="..."
-              className="img"
-              style={{width: 300, height: 200} }
-              />
-            <figcaption class="figure-caption" >{}</figcaption>
-          </figure>
-        })
-    }
+
     
+ 
     render() {
         return (
             <div class="container-fluid" class="shadow-none p-3 mb-5 bg-light rounded" >
                     <div  class="justify-content-lg-start">
                         <div class="col-4">
-                        <h2  >Descricon: </h2>
+                        <h5>Descricon: </h5>
                             <p class="text-end"> Las cactáceas son plantas de la familia de las suculentas. Son originarias de América pero también se encuentran en África y Madagascar. Son de tamaño mediano, grande o pequeño. En su interior contienen gran caudal de sábila como reserva de líquido dado que son plantas que se encuentran en climas desérticos (secos).
 
                                 Fuente: https://www.ejemplos.co/10-ejemplos-de-textos-descriptivos/#ixzz6yRqwt8ie</p>
@@ -66,7 +53,11 @@ class TrabajoRow extends React.Component {
                         ))}
                         </div>
 
-                    </div>  
+                        <Link to={`/Galeria/${this.state.trabajo._id}`} >
+                        <img src={imagen} style={{width: 90, height: 40, marginLeft:160 } }/>
+                        </Link>
+                    </div>
+                    {/* <button onClick={() => browserHistory.Push(`/photos`)}>l</button> */}
             </div>
         );
 

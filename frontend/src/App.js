@@ -2,7 +2,7 @@ import React from 'react';
 import ListaDePiletas from './components/ListaDePiletas'
 import CargarFoto from './components/CargarFoto'
 import ListaDeTrabajo from './components/ListaDeTrabajos'
-
+import TrabajosGaleri from './components/TrabajosGaleri';
 import {BrowserRouter as Router, Route, Switch, Redirect, NavLink} from "react-router-dom"
 
 import './App.css';
@@ -19,26 +19,31 @@ function CargarTrabajoComponent() {
 
 function App() {
   return (
-    
-    <div className="App">
     <Router>
-      <header className="App-header">
-        <ul>
-          <li><NavLink to="/photos">Fotos</NavLink></li>
-          <li><NavLink to="/CargarTrabajo">Trabajo</NavLink></li>
-          <li><NavLink to="/cargarF">CargarFoto</NavLink></li>
-        </ul>
-      </header>
-      <main className="App-main">
+      <div className="container mt-3 ">
+      <div className="btn-group">
+          <NavLink to="/photos" className="btn btn-secondary" >
+            Fotos
+          </NavLink>
+          <NavLink to="/CargarTrabajo" className="btn btn-secondary" >
+            Trabajo
+          </NavLink>
+          <NavLink to="/cargarF" className="btn btn-secondary" activeClassName="active"  >
+            CargarFoto
+          </NavLink>
+      </div>
+      <hr />
           <Switch>
-            <Route path="/photos"  component={ClientesComponent} />
-            <Route path="/CargarTrabajo"  component={CargarTrabajoComponent} />
-            <Route path="/cargarF"  component={CargarFotoComponent} />
+            <Route path="/Galeria/:id">
+              <TrabajosGaleri/>
+            </Route>
+            <Route path="/photos" component={ClientesComponent} />
+            <Route path="/CargarTrabajo" component={CargarTrabajoComponent} />
+            <Route path="/cargarF" component={CargarFotoComponent} />
             <Redirect to="/" />
           </Switch>
-      </main>
-      </Router>
     </div>
+      </Router>
   );
 }
 

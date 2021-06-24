@@ -21,18 +21,9 @@ class  ListaDePiletas extends React.Component{
         if(this.state.fotos.length > 0){
             return(
                 <div className = "Fotocss">
-                    <h2> {this.props.title}</h2>
-
-                <table>
-                 <thead>
-                     <tr>
-                         
-                     </tr>
-                 </thead>
                  <tbody>
                      {this.renderRows()}
                  </tbody>
-                </table>
             
                 </div>
                 

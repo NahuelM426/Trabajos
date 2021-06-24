@@ -20,10 +20,9 @@ class ListaDeTrabajo extends React.Component{
         if(this.state.trabajos.length > 0){
             return(
                 <div className = "Trabajoscss">
-                    <h2> {this.props.title}</h2>
-                 <div class="shadow-lg p-3 mb-5 bg-body rounded">
-                     {this.renderRows()}
-                 </div>
+                    <div class="shadow-lg p-4 mb-5 bg-body rounded">
+                        {this.renderRows()}
+                    </div>
                 </div>
                 
                 )
