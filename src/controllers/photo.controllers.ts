@@ -1,10 +1,14 @@
-import {Request,Response} from 'express'
+import {json, Request,Response} from 'express'
 import Fotos from '../models/Fotos'
 import Trabajo from '../models/Trabajo'
 import path from 'path'
 import fs from 'fs-extra'
 
-
+export async function  pruebaCrear (req:Request, res:Response): Promise<Response>{
+    console.log(req.body);
+    console.log("file",req.files)
+    return res.json('hola')   
+}
 export async function  getPhotos (req:Request, res:Response): Promise<Response>{
    const fotos =  await Fotos.find();
    console.log(fotos);
@@ -46,7 +50,6 @@ export async function createFoto (req: Request , res: Response): Promise<Respons
 }
 export async function createFotoid (req: Request , res: Response): Promise<Response>{
     
-    const{title} = req.body
     const{id}=req.params
     console.log("req.body",req.body)
     console.log("body",req.body.title)
@@ -54,7 +57,6 @@ export async function createFotoid (req: Request , res: Response): Promise<Respo
     
     
     const newPhoto={
-        title:title,
         filePath:req.file.path,
     };
 

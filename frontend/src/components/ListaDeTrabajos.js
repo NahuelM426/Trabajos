@@ -1,57 +1,62 @@
 import React from 'react'
 import TrabajoRow from './TrabajoRow'
+import '../App.css';
 
-class ListaDeTrabajo extends React.Component{
+class ListaDeTrabajo extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.select = this.select.bind(this);
-        this.state = { trabajos:[], selected:{}}
+        this.state = { trabajos: [], selected: {} }
 
     }
     componentWillMount() {
         fetch(`http://localhost:4000/pileta/piletas`)
-          .then( res => res.json())
-          .then( prds => {
-            this.setState({trabajos: prds},()=>{console.log("Trabajo",this.state)})}
-    )};
-    
-    render(){
-        if(this.state.trabajos.length > 0){
-            return(
-                <div className = "Trabajoscss">
-                    <div class="shadow-lg p-4 mb-5 bg-body rounded">
-                        {this.renderRows()}
-                    </div>
-                </div>
-                
-                )
+            .then(res => res.json())
+            .then(prds => {
+                this.setState({ trabajos: prds }, () => { console.log("Trabajo", this.state) })
             }
-            else {
-                return(
-                    <div className="productosCSS">
-                  CARGANDO
-              </div>);  
-          }
+            )
+    };
+
+    render() {
+        if (this.state.trabajos.length > 0) {
+            return (
+                <div class="row">
+                        {this.renderRows()}
+                </div>
+
+            )
         }
-        select(unTrabajo) {
-            this.setState({selected:unTrabajo })
+        else {
+            return (
+                <div className="productosCSS">
+                    CARGANDO
+                </div>);
         }
-       
-        renderRows() {
-            let trabajos = this.state.trabajos;
-            return !trabajos
-              ? console.log("NULL", null)
-              : trabajos.map((unTrabajo, index) => {
-                  return (
-                    <TrabajoRow 
-                      key = {index.index}
-                      trabajos={trabajos}
-                      id = {unTrabajo.id}
-                      trabajo={unTrabajo}
-                      selector={this.select}
-                      ></TrabajoRow>
-            )})}
+    }
+    select(unTrabajo) {
+        this.setState({ selected: unTrabajo })
+    }
+
+    renderRows() {
+        let trabajos = this.state.trabajos;
+        return !trabajos
+            ? console.log("NULL", null)
+            : trabajos.map((unTrabajo, index) => {
+                return (
+                    <div class="col-lg-5 col-sm-12 ml-5 bg-light border m-4 rounded">
+                        <TrabajoRow
+                            key={index.index}
+                            trabajos={trabajos}
+                            id={unTrabajo.id}
+                            trabajo={unTrabajo}
+                            selector={this.select}
+                        ></TrabajoRow>
+                    </div>
+                )
+            })
+    }
 }
 
 export default ListaDeTrabajo

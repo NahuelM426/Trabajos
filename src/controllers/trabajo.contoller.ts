@@ -23,6 +23,7 @@ export async function getTrabajosId(req: Request, res: Response): Promise<Respon
 
     return res.json({
         message: 'Se Encontro',
+        TrabajoB,
         fotos
     });
 }
@@ -54,23 +55,26 @@ export async function crearPileta(req:Request,res:Response):Promise<Response> {
 
 export async function crearTrabajo(req:Request,res:Response):Promise<Response> {
     
-    const{title} = req.body
+    const{descripcion} = req.body
+    const{titulo} = req.body
     const {tipo} =  req.body
 
     console.log("req.body",req.body)
-    console.log("body",req.body.title)
+    console.log("body",req.body.titulo)
     
     console.log('tipo',tipo);
     
-    console.log('tipo',title);
+    console.log('titulo',titulo);
     
-
+    console.log('descripcion',descripcion);
+    
     const newTrabajo = {
         tipo: tipo,
+        titulo:titulo,
+        descripcion:descripcion,
         fotos:[]
     }
     const newPhoto={
-        title:title,
         filePath:req.file.path,
         trabajo:{}
     };
@@ -95,6 +99,14 @@ export async function crearTrabajo(req:Request,res:Response):Promise<Response> {
         trabajo
     })
     
+}
+export async function delateTrabajo(req:Request , res:Response): Promise<Response>{
+    const {id} = req.params;
+    const trabajo = await Trabajo.findByIdAndRemove(id);
+    return res.json({
+        message:'Trabajo Eliminada',
+        trabajo
+    });
 }
 
 

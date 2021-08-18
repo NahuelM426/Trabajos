@@ -8,9 +8,9 @@ const morgan_1 = __importDefault(require("morgan")); //Me muestras mensages en c
 const app = express_1.default();
 var cors = require('cors');
 const index_1 = __importDefault(require("./routes/index"));
-const pileta_1 = __importDefault(require("./routes/pileta"));
+const trabajo_1 = __importDefault(require("./routes/trabajo"));
 //settings
-app.set('port', process.env.PORT || 4001);
+app.set('port', process.env.PORT || 4000);
 app.use(cors());
 //middleeares
 app.use(morgan_1.default('dev'));
@@ -19,5 +19,5 @@ app.use(express_1.default.json());
 app.use('/uploads', express_1.default.static('uploads'));
 //rutas configuro la ruta de donde pido los datos 
 app.use('/api', index_1.default);
-app.use('/pileta', pileta_1.default);
+app.use('/pileta', trabajo_1.default);
 exports.default = app;

@@ -3,14 +3,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.crearTrabajo = exports.crearPileta = exports.getPiletas = void 0;
+exports.crearTrabajo = exports.crearPileta = exports.getTrabajosId = exports.getTrabajos = void 0;
 const Trabajo_1 = __importDefault(require("../models/Trabajo"));
 const Fotos_1 = __importDefault(require("../models/Fotos"));
-async function getPiletas(req, res) {
+async function getTrabajos(req, res) {
     const trabajo = await Trabajo_1.default.find();
     return res.json(trabajo);
 }
-exports.getPiletas = getPiletas;
+exports.getTrabajos = getTrabajos;
+async function getTrabajosId(req, res) {
+    const TrabajoB = await Trabajo_1.default.findById(req.params.id);
+    const fotos = await Promise.all(TrabajoB.fotos.map(async (x) => {
+        return { foto: await Fotos_1.default.findById(x) };
+    }));
+    console.log("foto", fotos);
+    return res.json({
+        message: 'Se Encontro',
+        fotos
+    });
+}
+exports.getTrabajosId = getTrabajosId;
 async function crearPileta(req, res) {
     const { tipo } = req.body;
     console.log('body', req.body);
