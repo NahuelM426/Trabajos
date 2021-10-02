@@ -110,7 +110,7 @@ class CargarFoto extends React.Component {
         <div class="row border shadow-lg p-3 mb-5 bg-light bg-body rounded">
           <TodoForm onSubmit={this.addTodo} />
           {todos.map(todo => (
-            <div className="col-sm-3 ml-3 mt-2">
+            <div className="col-sm-4 ml-3 mt-2">
               <Todo
                 key={todo.id}
                 onDelete={() => this.handleDeleteTodo(todo.id)}

@@ -12,7 +12,7 @@ class TrabajoRow extends React.Component {
         console.log("wiillMonuntFotos")
         const _id = this.state.trabajo._id
         console.log("_id", _id)
-        fetch(`http://localhost:4000/pileta/piletas/` + _id)
+        fetch(`http://localhost:4000/pileta/trabajos/` + _id)
             .then(res => res.json())
             .then(prds => {
                 this.setState({ fotos: prds }, () => this.map())

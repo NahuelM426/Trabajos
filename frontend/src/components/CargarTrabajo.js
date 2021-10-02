@@ -27,7 +27,9 @@ class CargarTrabajo extends React.Component {
 
   handleSubmit = (e) => {
     const formData = new FormData();
-    formData.append('image', this.state.image);
+    this.state.imagenes.map(i => {
+      formData.append('imagenes', i.image);
+    })
     formData.append('descripcion', this.state.trabajo.descripcion)
     formData.append('titulo', this.state.trabajo.titulo)
     formData.append('tipo', this.state.trabajo.tipo)
@@ -39,7 +41,7 @@ class CargarTrabajo extends React.Component {
       }
     }
 
-    axios.post("http://localhost:4000/pileta/piletas", formData, conf)
+    axios.post("http://localhost:4000/pileta/array", formData, conf)
       .then((res) => res.json())
       .then(prds => alert(prds.message))
       .catch((error) => { });
@@ -53,9 +55,6 @@ class CargarTrabajo extends React.Component {
 
   }
 
-  // onChangeTexT = (e) =>{
-  //   this.setState({title: e.target.value});
-  // }
   onChangeTexT = (event) => {
     var newTrabajo = Object.assign({}, this.state.trabajo);
     newTrabajo[event.target.name] = event.target.value;
@@ -67,14 +66,15 @@ class CargarTrabajo extends React.Component {
       todos: [todo, ...this.state.todos]
     }, () => console.log("state Padre", this.state));
     this.setState({
-      imagenes: [todo.image, ...this.state.imagenes]
+      imagenes: [todo, ...this.state.imagenes]
     }, () => console.log("Padre-image", this.state.imagenes))
   };
 
   handleDeleteTodo = (id) => {
     this.setState({
-      todos: this.state.todos.filter(todo => todo.id !== id)
-    })
+      todos: this.state.todos.filter(todo => todo.id !== id),
+      imagenes:this.state.imagenes.filter(i => i.id !== id)
+    }, ()=> console.log("imagenes-eliminar",this.state.imagenes))
   }
 
   render() {
@@ -106,11 +106,11 @@ class CargarTrabajo extends React.Component {
             </div>
           </div>
         </form>
-        <hr />
-        <div class="row border col-lg-6 ml-3 shadow-lg p-1 mb-5 bg-light bg-body rounded">
+        
+        <div class="row border col-lg-8 col-md-10 col-sm-10 ml-3 mt-4 shadow-lg p-1  bg-light bg-body rounded">
           <TodoForm onSubmit={this.addTodo} />
           {todos.map(todo => (
-            <div className=" col-lg-4 col-md-6 col-sm-12 ml-2 mt-2">
+            <div className="col-lg-5 ml-2 mt-2">
               <Todo
                 key={todo.id}
                 onDelete={() => this.handleDeleteTodo(todo.id)}
@@ -120,7 +120,7 @@ class CargarTrabajo extends React.Component {
             </div>
           ))}
         </div>
-        <button  class="btn btn-outline-success" onClick={this.handleSubmit}> Listo</button>
+        <button class="btn btn-outline-success ml-3 m-2"  onClick={this.handleSubmit}> Listo</button>
       </div>
     );
 

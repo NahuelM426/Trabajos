@@ -9,13 +9,12 @@ const TrabajosGaleri = () => {
     const [foto, setFoto] = React.useState([])
     const [trabajo, setTrabajo] = React.useState([])
 
-
     React.useEffect(async () => {
         await buscarFotos()
     }, [])
 
     const buscarFotos = async () => {
-        const dato = await fetch(`http://localhost:4000/pileta/piletas/${id}`)
+        const dato = await fetch(`http://localhost:4000/pileta/trabajos/${id}`)
         const trabajo = await dato.json()
         setTrabajo(trabajo.TrabajoB)
         console.log("trbajo", trabajo)
@@ -48,7 +47,6 @@ const TrabajosGaleri = () => {
             </div>
         </div>
     )
-
 }
 
 export default TrabajosGaleri

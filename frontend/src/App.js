@@ -15,10 +15,10 @@ function CargarFotoComponent() {
   return (<CargarFoto entity="CargarF"/>)
 }
 function CargarTrabajoComponent() {
-  return (<ListaDeTrabajo entity="CargarTrabajo"/>)
+  return (<ListaDeTrabajo entity="ListaDeTrabajos"/>)
 }
 function CargarTrabajoFromComponent() {
-  return (<CargarTrabajo entity="CargarT"/>)
+  return (<CargarTrabajo entity="CargaDeTrabajo"/>)
 }
 
 function App() {
@@ -26,16 +26,10 @@ function App() {
     <Router>
       <div  className="container mt-3 ">
       <div className="color" className="btn-group">
-          <NavLink to="/photos" className="btn btn-secondary" >
-            Fotos
-          </NavLink>
-          <NavLink to="/CargarTrabajo" className="btn btn-secondary" >
+          <NavLink to="/ListaDeTrabajos" className="btn btn-secondary" >
             Trabajo
           </NavLink>
-          <NavLink to="/cargarF" className="btn btn-secondary" activeClassName="active"  >
-            CargarFoto
-          </NavLink>
-          <NavLink to="/cargarT" className="btn btn-secondary" activeClassName="active"  >
+          <NavLink to="/CargaDeTrabajo" className="btn btn-secondary" activeClassName="active"  >
             CargarTrabajo
           </NavLink>
       </div>
@@ -47,10 +41,8 @@ function App() {
             <Route path="/prueba">
               <Prueba></Prueba>
             </Route>
-            <Route path="/photos" component={ClientesComponent} />
-            <Route path="/CargarTrabajo" component={CargarTrabajoComponent} />
-            <Route path="/cargarF" component={CargarFotoComponent} />
-            <Route path="/cargarT" component={CargarTrabajoFromComponent} />
+            <Route path="/ListaDeTrabajos" component={CargarTrabajoComponent} />
+            <Route path="/CargaDeTrabajo" component={CargarTrabajoFromComponent} />
             <Redirect to="/" />
           </Switch>
     </div>

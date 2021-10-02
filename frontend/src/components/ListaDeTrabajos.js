@@ -11,7 +11,7 @@ class ListaDeTrabajo extends React.Component {
 
     }
     componentWillMount() {
-        fetch(`http://localhost:4000/pileta/piletas`)
+        fetch(`http://localhost:4000/pileta/trabajos`)
             .then(res => res.json())
             .then(prds => {
                 this.setState({ trabajos: prds }, () => { console.log("Trabajo", this.state) })

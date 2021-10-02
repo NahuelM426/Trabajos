@@ -11,13 +11,8 @@ export default class TodoForm extends React.Component {
 
     onChange = (e) => {
         console.log("event", e.target.files[0])
-
-        // const formData = new FormData();
-        // formData.append('imagenes',e.target.files[0]);
-
         this.setState({ image:e.target.files[0] })
         this.setState({ vista: URL.createObjectURL(e.target.files[0]) }, () => { console.log("file-onCha", this.state) });
-
     }
 
     handleSumit = (event) => {
@@ -33,9 +28,9 @@ export default class TodoForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSumit} enctype = " multipart / form-data ">
-                <label for="formFileLg" class="form-label m-2" >Elije Imagen</label>
-                <input type="file" name="imagenes" onChange= {this.onChange}></input>
-                <button class="btn btn-secondary ">Agregar</button>
+                <label for="formFileLg" class="form-label " >Elije Imagen</label>
+                <input type="file" name="imagenes" class="form-control-file col-md-12  mr-5 p-1" onChange= {this.onChange}></input>
+                <button class="btn btn-success col-md-12 mt-2 p-1">+</button>
             </form>
         );
     }
