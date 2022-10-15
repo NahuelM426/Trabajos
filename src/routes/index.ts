@@ -2,11 +2,12 @@ import {Router} from 'express'
 const router = Router();
 
 import {createFoto,getPhotos,getPhoto,delatePhoto, updatePhoto, createFotoid,pruebaCrear} from '../controllers/photo.controllers'
+import passport from 'passport';
 
 import multer from '../libs/multer'
 
 router.route('/photos')
-    .get(getPhotos)
+    .get(passport.authenticate('jwt',{session:false}),getPhotos)
     .post(multer.single('image'), createFoto)
 
 router.route('/prueba')

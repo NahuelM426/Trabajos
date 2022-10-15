@@ -35,7 +35,7 @@ export async function createFoto (req: Request , res: Response): Promise<Respons
 
     const newPhoto={
         title:title,
-        filePath:req.file.path
+        filePath:req.file?.path
     };
 
     const photo = new Fotos(newPhoto);
@@ -57,7 +57,7 @@ export async function createFotoid (req: Request , res: Response): Promise<Respo
     
     
     const newPhoto={
-        filePath:req.file.path,
+        filePath:req.file?.path,
     };
 
     var trabajoBus = await Trabajo.findById(id);

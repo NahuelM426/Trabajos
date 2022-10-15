@@ -9,7 +9,7 @@ const path_1 = __importDefault(require("path"));
 const storage = multer_1.default.diskStorage({
     destination: 'uploads',
     filename: (req, file, cb) => {
-        cb(null, uuidv4_1.uuid() + path_1.default.extname(file.originalname));
+        cb(null, (0, uuidv4_1.uuid)() + path_1.default.extname(file.originalname));
     }
 });
-exports.default = multer_1.default({ storage });
+exports.default = (0, multer_1.default)({ storage });

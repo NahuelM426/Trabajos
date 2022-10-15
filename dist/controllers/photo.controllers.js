@@ -3,11 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatePhoto = exports.delatePhoto = exports.createFotoid = exports.createFoto = exports.getPhoto = exports.getPhotos = void 0;
+exports.updatePhoto = exports.delatePhoto = exports.createFotoid = exports.createFoto = exports.getPhoto = exports.getPhotos = exports.pruebaCrear = void 0;
 const Fotos_1 = __importDefault(require("../models/Fotos"));
 const Trabajo_1 = __importDefault(require("../models/Trabajo"));
 const path_1 = __importDefault(require("path"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
+async function pruebaCrear(req, res) {
+    console.log(req.body);
+    console.log("file", req.files);
+    return res.json('hola');
+}
+exports.pruebaCrear = pruebaCrear;
 async function getPhotos(req, res) {
     const fotos = await Fotos_1.default.find();
     console.log(fotos);
@@ -23,13 +29,14 @@ async function getPhoto(req, res) {
 }
 exports.getPhoto = getPhoto;
 async function createFoto(req, res) {
+    var _a;
     const { title } = req.body;
     console.log("req.body", req.body);
     console.log("body", req.body.title);
     console.log("file", req.file);
     const newPhoto = {
         title: title,
-        filePath: req.file.path
+        filePath: (_a = req.file) === null || _a === void 0 ? void 0 : _a.path
     };
     const photo = new Fotos_1.default(newPhoto);
     await photo.save();
@@ -41,14 +48,13 @@ async function createFoto(req, res) {
 }
 exports.createFoto = createFoto;
 async function createFotoid(req, res) {
-    const { title } = req.body;
+    var _a;
     const { id } = req.params;
     console.log("req.body", req.body);
     console.log("body", req.body.title);
     console.log("file", req.params);
     const newPhoto = {
-        title: title,
-        filePath: req.file.path,
+        filePath: (_a = req.file) === null || _a === void 0 ? void 0 : _a.path,
     };
     var trabajoBus = await Trabajo_1.default.findById(id);
     console.log('trabajoBuscado', trabajoBus);

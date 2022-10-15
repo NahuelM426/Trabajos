@@ -2,6 +2,8 @@
 import { Request, Response } from 'express'
 import Trabajo from '../models/Trabajo'
 import Foto from '../models/Fotos'
+import fs from 'fs-extra'
+import path from 'path'
 import { ObjectId } from 'mongoose';
 
 
@@ -77,10 +79,24 @@ export async function crearTrabajoConFotos(req: Request, res: Response): Promise
 
 export async function delateTrabajo(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
+
+    const TrabajoB: any = await Trabajo.findById(id);
+
+    const fotos = await Promise.all(TrabajoB.fotos.map(async (x: number) => {
+        const photo = await Foto.findByIdAndRemove(x)
+        if(photo){
+            fs.unlink(path.resolve(photo.filePath))
+        } 
+        return{photo}
+    }));
     const trabajo = await Trabajo.findByIdAndRemove(id);
+
+    console.log("TrabajoB", TrabajoB)
+    console.log("foto", fotos)
     return res.json({
         message: 'Trabajo Eliminada',
-        trabajo
+        trabajo,
+        fotos
     });
 }
 
@@ -129,7 +145,7 @@ export async function crearTrabajo(req: Request, res: Response): Promise<Respons
         fotos: []
     }
     const newPhoto = {
-        filePath: req.file.path,
+        filePath: req.file?.path,
         trabajo: {}
     };
     
