@@ -1,35 +1,33 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Switch, Redirect, NavLink } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch,} from "react-router-dom"
 
-import CargarTrabajo from './components/CargarTrabajo';
+import CargarTrabajo from './components/CargarTrabajosHoosk';
 import Loguin from './components/Loguin';
+import TodasLasFotos from './components/TodasLasFotos';
 
-function CargarTrabajoFromComponent() {
-  return (<CargarTrabajo entity="CargaDeTrabajo" />)
-}
 function LoguinFromComponent() {
   return (<Loguin entity="Loguin" />)
 }
-
+function CargarTrabajoFromComponent() {
+  return (<CargarTrabajo entity="CargaDeTrabajo" />)
+}
+function TodaslasFotosFromComponent() {
+  return (<TodasLasFotos entity="TodaslasFotos" />)
+}
 
 function App() {
 
   return (
     <Router>
       <div className="container p-2">
-        <div className="colo btn-group">
-          <NavLink to="/CargaDeTrabajo" className="btn btn-secondary" activeClassName="active"  >
-            CargarTrabajo
-          </NavLink>
-          <NavLink to="/Loguin" className="btn btn-secondary" activeClassName="active"  >
-            Loguin
-          </NavLink>
-        </div>
         <hr />
         <Switch>
-          <Route exact path="/CargaDeTrabajo" component={CargarTrabajoFromComponent} />
-          <Route exact path="/Loguin" component={LoguinFromComponent} /> 
+          <Route exact path="/" component={LoguinFromComponent} /> 
+          <Route path="/Fotos/:token">
+            <TodasLasFotos></TodasLasFotos>
+          </Route>
+          <Route exact path="/CargaDeTrabajo/:token" component={CargarTrabajoFromComponent} />
         </Switch>
       </div>
     </Router>

@@ -18,7 +18,7 @@ const TodasLasFotos = () => {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTkxZmQ3Mjc2YTBhN2Y3ZGNlZGMyMiIsImVtYWlsIjoibWFzY2FAZ21haWwuY29tIiwiaWF0IjoxNjY1ODYyMTY4LCJleHAiOjE2NjU5NDg1Njh9.JjFh9uE1VylcPFXtLGDC3PdhlhUBpkYJ0WnVSYv6vR0"
+                //  Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTkxZmQ3Mjc2YTBhN2Y3ZGNlZGMyMiIsImVtYWlsIjoibWFzY2FAZ21haWwuY29tIiwiaWF0IjoxNjY1ODYyMTY4LCJleHAiOjE2NjU5NDg1Njh9.JjFh9uE1VylcPFXtLGDC3PdhlhUBpkYJ0WnVSYv6vR0"
             }
         })
         const fotos = await dato.json()

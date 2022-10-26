@@ -54,21 +54,21 @@ export async function signIn(req: Request, res: Response): Promise<Response> {
     if (!req.body.email || !req.body.password) {
         return res
             .status(400)
-            .json({ msg: "Please. Send your email and password" });
+            .json({ msg: "Por Favor Envía tu correo electrónico y contraseña" });
     }
 
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-        return res.status(400).json({ msg: "The User does not exists" });
+        return res.status(400).json({ msg: "El Usuario No Existe" });
     }
 
     const isMatch = await user.comparePassword(req.body.password);
 
     if (isMatch) {
-        return res.status(400).json({ token: createToken(user), msg: "Clave corresta"});
+        return res.status(400).json({ token: createToken(user)});
     }
 
     return res.status(401).json({
-        msg: "Clave inconrrecta"
+        msg: "Clave Inconrrecta"
     });
 }

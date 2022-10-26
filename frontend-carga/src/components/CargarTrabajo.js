@@ -26,6 +26,7 @@ class CargarTrabajo extends React.Component {
     }
   }
 
+
   estadoInicial = () => {
     console.log("antes", this.state)
     this.setState({
@@ -133,7 +134,7 @@ class CargarTrabajo extends React.Component {
         <div class="row border col-lg-8 col-md-10 col-sm-10 ml-3 mt-4 shadow-lg p-1  bg-light bg-body rounded">
           <TodoForm onSubmit={this.addTodo} />
           {todos.map(todo => (
-            <div className="col-lg-5 ml-2 mt-2"  data-bs-spy="scroll">
+            <div className="col-lg-5 ml-2 mt-2" data-bs-spy="scroll">
               <Todo
                 key={todo.id}
                 onDelete={() => this.handleDeleteTodo(todo.id)}
