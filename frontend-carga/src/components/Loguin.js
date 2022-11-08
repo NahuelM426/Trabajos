@@ -27,7 +27,6 @@ const Login = () => {
 
         if (prods.token != null) {
             history.push('/CargaDeTrabajo/' + prods.token)
-            // history.push('/CargaDeTrabajo')
         }
         else {
             alert(prods.msg)

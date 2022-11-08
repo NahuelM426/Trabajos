@@ -69,12 +69,9 @@ export async function crearTrabajoConFotos(req: Request, res: Response): Promise
     console.log("fotosP",arrayFotos)
     console.log("trabajo",trabajo)
     
-    await trabajo.save();
+    const saveTrabajo = await trabajo.save();
 
-    return res.json({
-        message: 'se guardo la Trabajo ',
-        trabajo
-    })
+    return res.status(200).json({ msg: "Se Creo Correstamente",saveTrabajo });
 }
 
 export async function delateTrabajo(req: Request, res: Response): Promise<Response> {

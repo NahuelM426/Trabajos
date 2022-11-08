@@ -9,11 +9,7 @@ const axios = require("axios");
 
 const CargarTrabajo = () => {
 
-  console.log(useParams())
   const { token } = useParams()
-  console.log("token", token)
-
-
 
   const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues:
@@ -23,17 +19,47 @@ const CargarTrabajo = () => {
       descripcion: '',
     }
   });
-  const [todos,setTodos] = useState([])
+  const [todosImagenes, setTodasImagenes] = useState([])
+  const [image, setImagen] = useState()
+  const [todoToSho, setTodoToSho] = useState()
+  const [imagenes, setImagenes] = useState([])
 
-  const onSubmit = (dato, even) => {
-    console.log("even", dato)
-    console.log("dato", even)
+  const onSubmit = (dato) => {
+    const formData = new FormData();
+    imagenes.map(i => {
+      formData.append('imagenes', i.image);
+    })
+
+    formData.append('descripcion', dato.descripcion)
+    console.log("dato.des", dato.tipo)
+    formData.append('titulo', dato.titulo)
+    formData.append('tipo', dato.tipo)
+    const conf = {
+      headers: {
+        Accept: 'application/json',
+        "Content-Type": "application/json",
+        'content-type': 'multipart/form-data',
+        Authorization: "Bearer " + token
+      }
+    }
+    console.log("fromdata", formData.tipo)
+
+    axios.post("http://localhost:4000/pileta/array", formData, conf)
+
+    window.location.reload()//recargar
   }
 
-  React.useEffect (todo => {
-    setTodos([todo]);
-  },[todos]);
+  const addTodo = (todo) => {
+    setTodasImagenes([todo, ...todosImagenes])
+    setImagenes([todo, ...imagenes])
+  };
 
+  const handleDeleteTodo = (id) => {
+    const filterTodaImages = todosImagenes.filter(todo => todo.id !== id)
+    const filterImages = imagenes.filter(i => i.id !== id)
+    setTodasImagenes(filterTodaImages)
+    setImagen(filterImages)
+  }
   return (
     <div class="container-xl">
       <form enctype=" multipart / form-data " onSubmit={handleSubmit(onSubmit)} >
@@ -53,37 +79,34 @@ const CargarTrabajo = () => {
           <div>
             <label for="title" class="col-sm-2 col-form-label">Tipo</label>
             <div class="col-sm-6">
-              <input
-                type="text"
-                name="tipo"
-                {...register('tipo', {
-                  required: true,
-                })}
-                class="form-control"
-                placeholder="Tipo" ></input>
+              <select class="form-select form-select-lg mb-3 form-control " aria-label=".form-select-lg example" {...register("tipo", { required: true, })}>
+                <option value="">Select...</option>
+                <option value="Casa">Casa</option>
+                <option value="Pileta">Pileta</option>
+              </select>
             </div>
           </div>
           <div>
             <label for="title" class="col-sm-2 col-form-label">Descripcion</label>
-            <div class="col-sm-6">
-              <input type="text"
+            <div class="col-sm-8">
+              <input
+                type="text"
                 name="descripcion"
                 {...register('descripcion', {
                   required: true,
                 })}
-                class="form-control"
+                class="form-control aria-label=With textarea"
                 placeholder="Descripcion" ></input>
             </div>
           </div>
         </div>
         <div class="row border col-lg-8 col-md-10 col-sm-10 ml-3 mt-4 shadow-lg p-1  bg-light bg-body rounded">
-          <TodoForm/>
-          {todos.map(todo => (
+          <TodoForm onSubmit={addTodo} />
+          {todosImagenes.map(todo => (
             <div className="col-lg-5 ml-2 mt-2" data-bs-spy="scroll">
               <Todo
                 key={todo.id}
-                onDelete={() => this.handleDeleteTodo(todo.id)}
-                boolean={() => this.handlePortado(todo.id)}
+                onDelete={() => handleDeleteTodo(todo.id)}
                 todo={todo}
               />
             </div>
@@ -92,8 +115,6 @@ const CargarTrabajo = () => {
         <hr />
         <input type="submit" value="Enviar" class="btn btn-outline-success ml-3 m-3" />
       </form>
-      {/* 
-      {/* <button class="btn btn-outline-success ml-3 m-3" onClick={this.handleSubmit}> Listo</button> */}
     </div>
   );
 }
