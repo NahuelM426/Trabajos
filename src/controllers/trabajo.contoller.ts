@@ -4,7 +4,6 @@ import Trabajo from '../models/Trabajo'
 import Foto from '../models/Fotos'
 import fs from 'fs-extra'
 import path from 'path'
-import { ObjectId } from 'mongoose';
 
 
 
@@ -75,7 +74,7 @@ export async function crearTrabajoConFotos(req: Request, res: Response): Promise
 }
 
 export async function delateTrabajo(req: Request, res: Response): Promise<Response> {
-    console.log("id",req.params.id)
+    console.log("id",req)
     const { id } = req.params;
 
 

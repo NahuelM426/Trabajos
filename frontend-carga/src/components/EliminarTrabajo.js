@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import EliminarTrabajoRow from './EliminarTrabajoRow';
+import { useParams } from 'react-router-dom';
 
 const EliminarTranjo = () => {
+    const { token } = useParams()
 
     const [trabajo, setTrabajo] = useState([])
     const [selected, setSelected] = useState()
@@ -36,6 +38,7 @@ const EliminarTranjo = () => {
                             trabajos={trabajo}
                             id={unTrabajo.id}
                             trabajo={unTrabajo}
+                            token = {token}
                             selector={select}
                         ></EliminarTrabajoRow>
                     </div>)

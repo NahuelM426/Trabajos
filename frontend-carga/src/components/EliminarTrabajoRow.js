@@ -1,11 +1,20 @@
+import { token } from 'morgan';
 import React from 'react';
 
 class EliminarTrabajoRow extends React.Component {
+
     constructor(props) {
         super(props);
         this.map = this.map.bind(this)
         this.eliminar = this.eliminar.bind(this)
-        this.state = { trabajos: props.trabajos, trabajo: props.trabajo, fotos: {}, n: 0, TrabajoF: [] }
+        this.state = {
+            trabajos: props.trabajos,
+            trabajo: props.trabajo,
+            fotos: {},
+            n: 0,
+            TrabajoF: [],
+            token: props.token
+        }
 
     }
     UNSAFE_componentWillMount = () => {
@@ -28,16 +37,17 @@ class EliminarTrabajoRow extends React.Component {
 
     }
     eliminar = (e) => {
-        console.log("e", this.state.trabajo)
         const _id = this.state.trabajo._id
+        const token = this.state.token
         fetch(`http://localhost:4000/pileta/trabajos/` + _id, {
             method: "DELETE",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                // Authorization: "Bearer " + token
+                Authorization: "Bearer " + token
             }
-        })
+        }).then((res) => res.json())
+          .then(prds => alert(prds.message))
         window.location.reload()
     }
 

@@ -34,7 +34,7 @@ function App() {
             <TodasLasFotos></TodasLasFotos>
           </Route>
           <Route exact path="/CargaDeTrabajo/:token" component={CargarTrabajoFromComponent} />
-          <Route exact path="/EliminarTrabajo" component={EliminarTrabajo} />
+          <Route exact path="/EliminarTrabajo/:token" component={EliminarTrabajo} />
         </Switch>
       </div>
     </Router>

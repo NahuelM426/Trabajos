@@ -13,5 +13,5 @@ router.route('/array')
     
 router.route('/trabajos/:id')
     .get(getTrabajosId)
-    .delete(delateTrabajo)
+    .delete(passport.authenticate('jwt',{session:false}),delateTrabajo)
 export default router;

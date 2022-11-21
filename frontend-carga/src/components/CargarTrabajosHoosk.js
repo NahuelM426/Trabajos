@@ -112,7 +112,7 @@ const CargarTrabajo = () => {
         <hr />
         <input type="submit" value="Enviar" class="btn btn-outline-success ml-3 m-3" />
       </form>
-      <Link to={`/EliminarTrabajo`} >
+      <Link to={`/EliminarTrabajo/${token}`} >
         {/* <img src={imagen} class="rounded border imgLink" /> */}
         <button class="btn btn-outline-danger ml-3 m-3  ">Eliminar Trabajos</button>
       </Link>
