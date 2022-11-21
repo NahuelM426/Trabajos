@@ -30,8 +30,7 @@ const TodasLasFotos = () => {
     }
 
     return (
-        <div class="container-fluid color">
-            <div>
+        <div class="container-fluid">
                 {foto.map(f => (
                     <figure>
                         <img
@@ -41,11 +40,6 @@ const TodasLasFotos = () => {
                         />
                     </figure>
                 ))}
-                <div>
-                </div>
-                <div class="col-4"  >
-                </div>
-            </div>
         </div>
     )
 }

@@ -5,12 +5,9 @@ import { useForm } from "react-hook-form"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
-
-const axios = require("axios")
-
 const Login = () => {
     let history = useHistory();
-    const { register, formState: { errors }, handleSubmit } = useForm({
+    const { register, handleSubmit } = useForm({
         defaultValues:
         {
             email: '',

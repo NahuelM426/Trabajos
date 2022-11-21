@@ -5,13 +5,14 @@ import Todo from './Todo'
 import '../App.css';
 import { useForm } from "react-hook-form"
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 const axios = require("axios");
 
 const CargarTrabajo = () => {
 
   const { token } = useParams()
 
-  const { register, formState: { errors }, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues:
     {
       tipo: '',
@@ -20,14 +21,12 @@ const CargarTrabajo = () => {
     }
   });
   const [todosImagenes, setTodasImagenes] = useState([])
-  const [image, setImagen] = useState()
-  const [todoToSho, setTodoToSho] = useState()
   const [imagenes, setImagenes] = useState([])
 
   const onSubmit = (dato) => {
     const formData = new FormData();
     imagenes.map(i => {
-      formData.append('imagenes', i.image);
+      return formData.append('imagenes', i.image);
     })
 
     formData.append('descripcion', dato.descripcion)
@@ -56,9 +55,7 @@ const CargarTrabajo = () => {
 
   const handleDeleteTodo = (id) => {
     const filterTodaImages = todosImagenes.filter(todo => todo.id !== id)
-    const filterImages = imagenes.filter(i => i.id !== id)
     setTodasImagenes(filterTodaImages)
-    setImagen(filterImages)
   }
   return (
     <div class="container-xl">
@@ -115,6 +112,10 @@ const CargarTrabajo = () => {
         <hr />
         <input type="submit" value="Enviar" class="btn btn-outline-success ml-3 m-3" />
       </form>
+      <Link to={`/EliminarTrabajo`} >
+        {/* <img src={imagen} class="rounded border imgLink" /> */}
+        <button class="btn btn-outline-danger ml-3 m-3  ">Eliminar Trabajos</button>
+      </Link>
     </div>
   );
 }

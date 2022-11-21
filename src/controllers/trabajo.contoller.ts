@@ -75,7 +75,9 @@ export async function crearTrabajoConFotos(req: Request, res: Response): Promise
 }
 
 export async function delateTrabajo(req: Request, res: Response): Promise<Response> {
+    console.log("id",req.params.id)
     const { id } = req.params;
+
 
     const TrabajoB: any = await Trabajo.findById(id);
 
@@ -91,7 +93,7 @@ export async function delateTrabajo(req: Request, res: Response): Promise<Respon
     console.log("TrabajoB", TrabajoB)
     console.log("foto", fotos)
     return res.json({
-        message: 'Trabajo Eliminada',
+        message: 'Trabajo Eliminado',
         trabajo,
         fotos
     });

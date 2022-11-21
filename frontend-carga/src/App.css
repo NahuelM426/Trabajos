@@ -1,5 +1,6 @@
 .App {
   text-align: start;
+  height: 100vh;
   
 }
 .body{
@@ -10,8 +11,9 @@
   background: linear-gradient(301deg, rgba(123,240,205,1) 4%, rgba(9,194,237,1) 32%, rgba(35,214,212,1) 54%, rgba(0,212,255,1) 76%);}
  
 .imgT {
-  width: 100%;
-  height: 100%;
+  margin-top: 6px;
+  width: 70%;
+  height: 70%;
 }
 .imgPortada {
   width: 100%;

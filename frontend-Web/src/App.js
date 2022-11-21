@@ -32,7 +32,7 @@ function App() {
   return (
     <Router>
       <div className="container mt-3 ">
-          <div className="color btn-group">
+          <div className="btn-group">
             <NavLink to="/Home" className="btn btn-secondary" >
               Inicio
             </NavLink>

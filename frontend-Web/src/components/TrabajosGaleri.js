@@ -27,7 +27,7 @@ const TrabajosGaleri = () => {
     console.log("datos Trabajo", trabajo)
 
     return (
-        <div class="container-fluid color">
+        <div class="container-fluid">
             <div>
                 {foto.map(f => (
                     <figure>
@@ -38,8 +38,6 @@ const TrabajosGaleri = () => {
                         />
                     </figure>
                 ))}
-                <div>
-                </div>
                 <div class="col-4"  >
                     <h5>{trabajo.titulo}</h5>
                     <h7>Descripción: </h7> <p class="text-end"> {trabajo.descripcion}</p>

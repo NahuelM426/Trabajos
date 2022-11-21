@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch,} from "react-router-dom"
 import CargarTrabajo from './components/CargarTrabajosHoosk';
 import Loguin from './components/Loguin';
 import TodasLasFotos from './components/TodasLasFotos';
+import EliminarTranjo from './components/EliminarTrabajo';
 
 function LoguinFromComponent() {
   return (<Loguin entity="Loguin" />)
@@ -12,9 +13,14 @@ function LoguinFromComponent() {
 function CargarTrabajoFromComponent() {
   return (<CargarTrabajo entity="CargaDeTrabajo" />)
 }
-function TodaslasFotosFromComponent() {
-  return (<TodasLasFotos entity="TodaslasFotos" />)
+// function TodaslasFotosFromComponent() {
+//   return (<TodasLasFotos entity="TodaslasFotos" />)
+// }
+
+function EliminarTrabajo() {
+  return (<EliminarTranjo entity="EliminarTrabajo" />)
 }
+
 
 function App() {
 
@@ -28,6 +34,7 @@ function App() {
             <TodasLasFotos></TodasLasFotos>
           </Route>
           <Route exact path="/CargaDeTrabajo/:token" component={CargarTrabajoFromComponent} />
+          <Route exact path="/EliminarTrabajo" component={EliminarTrabajo} />
         </Switch>
       </div>
     </Router>
